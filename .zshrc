@@ -68,3 +68,4 @@ setopt pushdignoredups
 setopt pushdminus
 alias ll='ls -la'
 alias h='cd ~'
+alias d='dirs -v'
