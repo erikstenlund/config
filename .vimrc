@@ -1,3 +1,19 @@
+map j gj
+map k gk
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+set number
+set listchars=tab:▸\ ,eol:¬
+
+" Map Caps to Esc inside Vim
+au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+
 set expandtab
 
 " An example for a vimrc file.
@@ -47,11 +63,15 @@ if has('mouse')
 endif
 
 " Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
+" Also switch on highlighing the last used search pattern.
 
 syntax on
 set hlsearch
-
+if has ('gui_running')
+        set guifont=Inconsolata
+        set background=dark
+        colorscheme solarized
+endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
