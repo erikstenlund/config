@@ -10,10 +10,6 @@ nnoremap <C-l> <C-w>l
 set number
 set listchars=tab:▸\ ,eol:¬
 
-" Map Caps to Esc inside Vim
-au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
-
 set expandtab
 
 " An example for a vimrc file.
