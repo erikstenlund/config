@@ -6,6 +6,28 @@
         package-archives)
   (package-initialize)
 
+;; Org mode
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(require 'evil-org)
+
+;; Evil-Leader , as leader key
+(require 'evil-leader)
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+(evil-leader/set-key
+  "ci" 'evilnc-comment-or-uncomment-lines
+  "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "ll" 'evilnc-quick-comment-or-uncomment-to-the-line
+  "cc" 'evilnc-copy-and-comment-lines
+  "cp" 'evilnc-comment-or-uncomment-paragraphs
+  "cr" 'comment-or-uncomment-region
+  "cv" 'evilnc-toggle-invert-comment-line-by-line
+  "\\" 'evilnc-comment-operator ; if you prefer backslash key
+)
+
 ;; Neotree
 (require 'neotree)
 (global-set-key (kbd "M-n") 'neotree-toggle)
@@ -14,36 +36,52 @@
 (define-key neotree-mode-map (kbd "j") #'neotree-previous-line)
 (define-key neotree-mode-map (kbd "k") #'neotree-next-line)
 
+;; Should deside to use only either ^ mode or evil-mode-map
+(add-hook 'neotree-mode-hook
+	  (lambda ()
+	    (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)
+	    (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+	    (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-enter)
+	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+            (define-key evil-normal-state-local-map (kbd "-") 'neotree-select-up-node)))
+
+;; Twitter no password
 (require 'twittering-mode)
 (setq twittering-use-master-password t)
 
+;; Evil-mode
 (setq evil-want-C-i-jump nil)
 (require 'evil)
 (evil-mode 1)
 
 (require 'evil-surround)
 (global-evil-surround-mode 1)
-;; (global-evil-tabs-mode t)
+
+(require 'evil-tabs)
+(global-evil-tabs-mode t)
 
 (require 'powerline)
 (powerline-center-evil-theme)
 
-;; Skapa tagsfil med M-x create-tags
-(defun create-tags (dir-name)
-  "Create tags file."
-  (interactive "DDirectory: ")
-  (shell-command
-   (format "ctags -f %s -e -R %s" path-to-ctags (directory-file-name dir-name)))
-  )
+;; Move visual lines up or down
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-;; Visa rader på sidan när det är kodfil
-(add-hook 'prog-mode-hook 'linum-mode)
-
-;; Flytta mellan fönster enklare
+;; Faster window switch 
 (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+;; Show matching parentases
+(show-paren-mode t)
+
+;; Show line numbers while in programing mode
+(add-hook 'prog-mode-hook 'linum-mode)
+
+;; No backups
+(setq make-backup-files nil)
 
 ;; Markdown major mode
 (autoload 'markdown-mode "markdown-mode"
@@ -52,13 +90,26 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-;; Rad- och kolumnnummer i panelen, radnummer vid sidan och minskad
-;; toolbar där uppe
+;; Show line and column number in bar 
 (line-number-mode 1)
 (column-number-mode 1)
+
+;; Operations operates on visual and not logical lines
 (visual-line-mode 1)
+
+;; No toolbar
 (tool-bar-mode -1)
 
+;; Smoother scrolling
+(setq scroll-margin 5
+scroll-conservatively 9999
+scroll-step 1)
+
+;; flycheck
+;;(require 'flycheck)
+;;(global-flycheck-mode t)
+
+;; MADE BY EMACS!
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -103,12 +154,15 @@
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(magit-diff-use-overlays nil)
+ '(menu-bar-mode nil)
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
+ '(scroll-bar-mode nil)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
  '(tool-bar-mode nil)
+ '(transient-mark-mode (quote (only . t)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
