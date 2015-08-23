@@ -10,8 +10,8 @@ nnoremap <C-l> <C-w>l
 set number
 set listchars=tab:▸\ ,eol:¬
 
-set expandtab
-
+" set expandtab
+       
 " An example for a vimrc file.
 "
 " 
@@ -49,6 +49,9 @@ set incsearch		" do incremental searching
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
+" Use :E for explorer
+cabbrev E Explore
+
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
@@ -64,9 +67,12 @@ endif
 syntax on
 set hlsearch
 if has ('gui_running')
-        set guifont=Inconsolata
-        set background=dark
-        colorscheme solarized
+        set guifont=Meslo\ LG\ S\ 10
+	" iset background=dark
+        colorscheme monokai
+
+	" Always show statusline
+		set laststatus=2
 endif
 
 " Only do this part when compiled with support for autocommands.
