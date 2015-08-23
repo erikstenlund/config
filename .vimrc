@@ -67,6 +67,10 @@ endif
 syntax on
 set hlsearch
 if has ('gui_running')
+	set guioptions-=m "remove menu bar
+	set guioptions-=T "remove toolbar
+	set guioptions-=r "remove right scroll bar
+
         set guifont=Meslo\ LG\ S\ 10
 	" iset background=dark
         colorscheme monokai
