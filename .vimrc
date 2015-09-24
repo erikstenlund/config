@@ -1,3 +1,40 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
+
+call vundle#end()
+filetype plugin indent on
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+"Airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+set noshowmode
+set timeoutlen=50
+
+"Tagbar
+nmap <C-m> :TagbarToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Autoclose scratch while using omnicompletion
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
 map j gj
 map k gk
 
@@ -7,31 +44,23 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Use :E for explorer
+cabbrev E Explore
+
 set number
+set relativenumber
 set listchars=tab:▸\ ,eol:¬
 
-" set expandtab
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
        
 " An example for a vimrc file.
-"
-" 
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
 " Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
 endif
-
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -41,6 +70,7 @@ if has("vms")
 else
   set backup		" keep a backup file
 endif
+
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
@@ -49,8 +79,6 @@ set incsearch		" do incremental searching
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" Use :E for explorer
-cabbrev E Explore
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
@@ -74,9 +102,11 @@ if has ('gui_running')
         set guifont=Meslo\ LG\ S\ 10
 	" iset background=dark
         colorscheme monokai
+	
+else
+	set t_Co=256
+	let g:solarized_termcolors=256
 
-	" Always show statusline
-		set laststatus=2
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -86,7 +116,7 @@ if has("autocmd")
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+  " filetype plugin indent on
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
