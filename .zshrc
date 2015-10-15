@@ -4,18 +4,20 @@ autoload -U colors && colors
 PROMPT="%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}~> "
 RPROMPT="%{$fg[cyan]%}%~%{$reset_color%}"
 
-bindkey -e
+#bindkey -e
 
 # Prompt when using Vi-mode instead of Emacs mode
-#export KEYTIMEOUT=1
-#bindkey -v
-#function zle-keymap-select zle-line-init () {
-#    PROMPT="${${KEYMAP/vicmd/"%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}%{$fg[white]%}~<N>~> %{$reset_color%}"}/(main|viins)/"%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}%{$fg[green]%}~<I>~> %{$reset_color%}"}"
-#    zle reset-prompt
-#}
+export KEYTIMEOUT=1
+bindkey -v
+# Keep backward search using Vi mode
+bindkey '^r' history-incremental-search-backward
+function zle-keymap-select zle-line-init () {
+    PROMPT="${${KEYMAP/vicmd/"%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}/(main|viins)/"%{$fg[blue]%}%n%{$fg[green]%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}"
+    zle reset-prompt
+}
 
-#zle -N zle-line-init
-#zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # HISTORY SETTINGS
 # Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
@@ -60,10 +62,16 @@ export LESSCHARSET=utf-8
 bindkey "\e[3~" delete-char
 bindkey ";5D" backward-word
 bindkey ";5C" forward-word
+bindkey "5~" kill-word
 
 # ALIASES
 alias ll='ls -la'
 alias pac="sudo pacman -S"
+alias apt="sudo apt-get install"
+alias gopen="gnome-open"
+alias l="ls --color=auto"
+alias c="cd"
+alias cc="cd .."
 alias ls="ls --color=auto"
 
 ## Color on man pages
@@ -78,3 +86,6 @@ export LESS=-r
 
 # FUNCTIONS
 
+function cl() {
+	cd "$@" && ls
+}

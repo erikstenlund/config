@@ -24,7 +24,7 @@ map <C-n> :NERDTreeToggle<CR>
 set laststatus=2
 let g:airline_powerline_fonts = 1
 set noshowmode
-set timeoutlen=50
+set timeoutlen=100
 
 "Tagbar
 nmap <C-m> :TagbarToggle<CR>
@@ -35,6 +35,7 @@ nmap <C-m> :TagbarToggle<CR>
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" Move visual lines
 map j gj
 map k gk
 
@@ -51,6 +52,9 @@ set number
 set relativenumber
 set listchars=tab:▸\ ,eol:¬
 
+" Keep .swp and backup files in a separate directory
+set dir=~/.vimswapfiles
+set backupdir=~/.vimbackupfiles
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
        
 " An example for a vimrc file.
@@ -93,7 +97,7 @@ endif
 " Also switch on highlighing the last used search pattern.
 
 syntax on
-set hlsearch
+"set hlsearch
 if has ('gui_running')
 	set guioptions-=m "remove menu bar
 	set guioptions-=T "remove toolbar
@@ -102,7 +106,7 @@ if has ('gui_running')
         set guifont=Meslo\ LG\ S\ 10
 	" iset background=dark
         colorscheme monokai
-	
+	"set showtabline=2	
 else
 	set t_Co=256
 	let g:solarized_termcolors=256
