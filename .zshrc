@@ -70,9 +70,11 @@ alias pac="sudo pacman -S"
 alias apt="sudo apt-get install"
 alias gopen="gnome-open"
 alias l="ls --color=auto"
+alias ls="ls --color=auto"
 alias c="cd"
 alias cc="cd .."
-alias ls="ls --color=auto"
+alias :q="exit"
+alias :wq="exit"
 
 ## Color on man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
