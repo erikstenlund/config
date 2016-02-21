@@ -132,8 +132,8 @@ function! SummarizeTabs()
 endfunction
 
 " Keep .swp and backup files in a separate directory
-set dir=~/.config/nvim/.vimswapfiles//
-set backupdir=~/.config/nvim/.vimbackupfiles//
+set dir=~/.vim/.vimswapfiles//
+set backupdir=~/.vim/.vimbackupfiles//
 
 
 " Based on the example .vimrc file
