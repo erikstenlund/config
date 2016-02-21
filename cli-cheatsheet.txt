@@ -1,0 +1,19 @@
+ln -s LINK_TARGET LINK_NAME
+
+sed -i 's/foo/bar/g' filename <= -i in place, w/o to stdout
+
+wget -O ~/Downloads/bar.txt www.foo.com/bar.txt
+
+ls | awk 'BEGIN { print "FileName:" } { print $1 }'
+
+grep -nR PATTERN [FILE] <= -r doesnt follow symlinks -R does
+
+find . -iname "fIlEnAmE*" <= -L follows symlinks
+
+tar czf arcname.tar.gz filelist/dir <= Creates arcname.tar.gz from
+filelist/dir
+
+tar xzf arcname.tar.gz <= untar
+
+locate FILENAME <= search after filename in all directories
+
