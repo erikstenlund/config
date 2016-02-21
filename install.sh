@@ -2,7 +2,7 @@
 HOMEDIR=${1:-/home/$USER}/
 echo "Setting up dotfiles into $HOMEDIR"
 
-mkdir -pv $HOMEDIR/.vim/bundle
+mkdir -pv $HOMEDIR/.vim/{.vimswapfiles,.vimbackupfiles,bundle}
 
 echo "Set up symlinks to $HOMEDIR"
 ln -sv $PWD/.vimrc $HOMEDIR 
