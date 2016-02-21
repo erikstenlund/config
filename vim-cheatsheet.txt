@@ -1,0 +1,27 @@
+Vim cheat cheet
+
+:%s/old/new/g <- g = all, w = confirm
+:2,35s/old/new/ <- between line 2-35, first match
+:5,$s/old/new/g
+:s/$/appended_end/g
+:s/^/appended_begin/g
+
+:s%/\<foo\>/bar/g <- substitute only exactly foo
+:.,$s/foo/bar/g <- from current to last line
+
+Skapa grupper med genom att omringa regex med \( \), \1 - \9 kan sedan
+anvandas for att matcha forsta till nionde gruppen:
+:s:0\([0-9]\):\1:g <- remove first zero from all numbers 00 - 99
+
+:g/string/d <- delete all lines containing string
+
+:1,10 w <- save line 1 to 10
+
+:23r infile <- insert content of infile under line 23
+
+:!ls <- execute ls
+:!!ls <- execute ls and insert output in file
+
+mk <- mark current position as k
+~k <- move to k
+

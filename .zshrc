@@ -75,7 +75,11 @@ alias c="cd"
 alias cc="cd .."
 alias :q="exit"
 alias :wq="exit"
+#alias vim=nvim
 
+# Settings for nvm
+export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 ## Color on man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -87,7 +91,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export LESS=-r
 
 # FUNCTIONS
-
 function cl() {
 	cd "$@" && ls
 }
