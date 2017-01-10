@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.config/nvim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
@@ -12,6 +12,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'kchmck/vim-coffee-script'
@@ -29,10 +30,16 @@ map <C-n> :NERDTreeToggle<CR>
 
 "Airline
 set laststatus=2
-let g:airline_powerline_fonts = 1
-set noshowmode
-set ttimeoutlen=100 "this messes up vim-surround!
-set t_Co=256
+ let g:airline_powerline_fonts = 1
+ set noshowmode
+ set ttimeoutlen=100 "this messes up vim-surround!
+ set t_Co=256
+
+" Manual statusline instead of Airline
+" set statusline+=%F
+" set statusline+=\ - 
+" set statusline+=%y
+
 
 "Tagbar (Obs <C-m> == Enter)
 map <C-m> :TagbarToggle<CR> 
@@ -46,6 +53,16 @@ let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+if has ('gui_running')
+	set vb t_vb=
+	set guioptions-=m
+	set guioptions-=T
+	set guioptions-=L
+	set guioptions-=R
+	colorscheme monokai 
+	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
+endif
 
 " Regular settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,6 +119,7 @@ nmap :Q :q
 set number
 set relativenumber
 set listchars=tab:▸\ ,eol:¬
+
 
 " Set tabstop, softtabstop and shiftwidth to the same value, from vimCasts
 command! -nargs=* Stab call Stab()

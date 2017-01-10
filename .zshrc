@@ -7,22 +7,22 @@ RPROMPT="%{$fg[cyan]%}%~%{$reset_color%}"
 #bindkey -e
 
 # Prompt when using Vi-mode instead of Emacs mode
-export KEYTIMEOUT=1
-bindkey -v
-# Keep backward search using Vi mode
-bindkey '^r' history-incremental-search-backward
-function zle-keymap-select zle-line-init () {
-    PROMPT="${${KEYMAP/vicmd/"%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}/(main|viins)/"%{$fg[blue]%}%n%{$fg[green]%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}"
-    zle reset-prompt
-}
+# export KEYTIMEOUT=1
+# bindkey -v
+# # Keep backward search using Vi mode
+# bindkey '^r' history-incremental-search-backward
+# function zle-keymap-select zle-line-init () {
+#     PROMPT="${${KEYMAP/vicmd/"%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}/(main|viins)/"%{$fg[blue]%}%n%{$fg[green]%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}"
+#     zle reset-prompt
+# }
 
-zle -N zle-line-init
-zle -N zle-keymap-select
+# zle -N zle-line-init
+# zle -N zle-keymap-select
 
 # HISTORY SETTINGS
-# Keep 10000 lines of history within the shell and save it to ~/.zsh_history:
-HISTSIZE=10000
-SAVEHIST=10000
+# Keep X lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=100000000
+SAVEHIST=100000000
 HISTFILE=~/.zsh_history
 setopt inc_append_history
 setopt hist_ignore_dups
@@ -50,10 +50,6 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# Use vim
-export EDITOR=vim
-export VISUAL=vim
-
 # Fix auto exit at eof and utf-8 in LESS
 export LESS=dMqifR
 export LESSCHARSET=utf-8
@@ -63,23 +59,38 @@ bindkey "\e[3~" delete-char
 bindkey ";5D" backward-word
 bindkey ";5C" forward-word
 bindkey "5~" kill-word
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
 
-# ALIASES
+# Aliases
 alias ll='ls -la'
 alias pac="sudo pacman -S"
 alias apt="sudo apt-get install"
 alias gopen="gnome-open"
 alias l="ls --color=auto"
 alias ls="ls --color=auto"
+alias grep="grep --color=auto"
 alias c="cd"
 alias cc="cd .."
 alias :q="exit"
 alias :wq="exit"
-#alias vim=nvim
+alias gk="gitk --all&"
+alias sz='source ~/.zshrc'
+alias vz='vim ~/.zshrc'
+alias vzw='vim ~/.zaxisrc'
+alias vv='vim ~/.vimrc'
+alias v='vim'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias rh="cat ~/.zsh_history | grep "
+alias gd='git diff'
+alias ccd='pushd'
 
-# Settings for nvm
-export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+## i3 lockscreen
+alias i3lock='i3lock -i ~/Pictures/space.png'
+
 ## Color on man pages
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -90,7 +101,12 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 export LESS=-r
 
-# FUNCTIONS
+# Functions
 function cl() {
-	cd "$@" && ls
+	cd "$1" && ls
 }
+
+# Work
+source ~/.zaxisrc
+
+unsetopt correct
