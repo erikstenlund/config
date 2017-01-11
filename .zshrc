@@ -1,7 +1,12 @@
 # PROMPT SETTINGS
 # Set up the prompt
 autoload -U colors && colors
-PROMPT="%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}~> "
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+zstyle '*' formats '%b'
+PROMPT="%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}\${vcs_info_msg_0_:=%m}%{$reset_color%}~> "
 RPROMPT="%{$fg[cyan]%}%~%{$reset_color%}"
 
 #bindkey -e
