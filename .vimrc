@@ -14,11 +14,11 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'kchmck/vim-coffee-script'
+Plugin 'vivien/vim-linux-coding-style'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'msanders/snipmate.vim'
-Plugin 'ternjs/tern_for_vim'
+Plugin 'sickill/vim-monokai'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on
@@ -30,27 +30,26 @@ map <C-n> :NERDTreeToggle<CR>
 
 "Airline
 set laststatus=2
- let g:airline_powerline_fonts = 1
- set noshowmode
- set ttimeoutlen=100 "this messes up vim-surround!
- set t_Co=256
+let g:airline_powerline_fonts = 1
+let g:airline_section_z = airline#section#create(['%4l/%L%3v'])
+set noshowmode
+set ttimeoutlen=100 "this messes up vim-surround!
+set t_Co=256
 
 " Manual statusline instead of Airline
 " set statusline+=%F
 " set statusline+=\ - 
 " set statusline+=%y
 
-
 "Tagbar (Obs <C-m> == Enter)
-map <C-m> :TagbarToggle<CR> 
+map <C-m> :TagbarToggle<CR>
 
-"Syntastic default
+"Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -64,8 +63,78 @@ if has ('gui_running')
 	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 endif
 
+highlight clear SignColumn
+highlight SyntasticError ctermbg=red ctermfg=white
+highlight SyntasticWarning ctermbg=yellow
+highlight SyntasticStyleError ctermbg=yellow
+highlight SyntasticStyleWarning ctermbg=yellow
+
+
+" Omcicompletion from http://stackoverflow.com/questions/30180064/how-to-setup-youcompleteme-for-kernel-and-device-driver-development
+"
+
+set tags=./tags;
+
+" Configure menu behavior
+" http://vim.wikia.com/wiki/VimTip1386
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" Use Ctrl+Space for omni-completion
+" http://stackoverflow.com/questions/510503/ctrlspace-for-omni-and-keyword-completion-in-vim
+inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
+  \ "\<lt>C-n>" :
+  \ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
+  \ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
+  \ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
+imap <C-@> <C-Space>
+
+" Popup menu hightLight Group
+highlight Pmenu ctermbg=13 guibg=LightGray
+highlight PmenuSel ctermbg=7 guibg=DarkBlue guifg=White
+highlight PmenuSbar ctermbg=7 guibg=DarkGray
+highlight PmenuThumb guibg=Black
+
+" enable global scope search
+let OmniCpp_GlobalScopeSearch = 1
+" show function parameters
+let OmniCpp_ShowPrototypeInAbbr = 1
+" show access information in pop-up menu
+let OmniCpp_ShowAccess = 1
+" auto complete after '.'
+let OmniCpp_MayCompleteDot = 1
+" auto complete after '->'
+let OmniCpp_MayCompleteArrow = 1
+" auto complete after '::'
+let OmniCpp_MayCompleteScope = 0
+" don't select first item in pop-up menu
+let OmniCpp_SelectFirstItem = 0
+
 " Regular settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" gVim specific settings
+if has('gui_running')
+	set guioptions-=T "no toolbar
+	set guioptions-=m "no menubar
+	set guioptions-=r "no right-hand scroll bar
+	set guioptions-=L "no left-hand scroll bar
+	colorscheme gruvbox
+	set background=dark
+
+	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+
+endif
+
+" Highlight color
+highlight IncSearch ctermfg=yellow ctermbg=NONE
+highlight Search ctermfg=yellow ctermbg=NONE
+
 " Autoclose scratch while using omnicompletion
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -88,6 +157,7 @@ nmap <leader>w :w!<CR>
 " Use F2 - F12 to something useful
 map <F2> :ls<CR>
 map <F3> :reg<CR>
+map <F4> :!make<CR>
 
 " Clipboard shortcuts
 noremap <leader>y "+y
