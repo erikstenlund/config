@@ -8,6 +8,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-sleuth'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -62,13 +63,6 @@ if has ('gui_running')
 	colorscheme monokai 
 	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
 endif
-
-highlight clear SignColumn
-highlight SyntasticError ctermbg=red ctermfg=white
-highlight SyntasticWarning ctermbg=yellow
-highlight SyntasticStyleError ctermbg=yellow
-highlight SyntasticStyleWarning ctermbg=yellow
-
 
 " Omcicompletion from http://stackoverflow.com/questions/30180064/how-to-setup-youcompleteme-for-kernel-and-device-driver-development
 "
@@ -135,6 +129,12 @@ endif
 highlight IncSearch ctermfg=yellow ctermbg=NONE
 highlight Search ctermfg=yellow ctermbg=NONE
 
+highlight SignColumn ctermbg=black
+highlight SyntasticError ctermbg=white ctermfg=red
+highlight SyntasticWarning ctermbg=yellow
+highlight SyntasticStyleError ctermbg=yellow
+highlight SyntasticStyleWarning ctermbg=yellow
+
 " Autoclose scratch while using omnicompletion
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -187,7 +187,6 @@ nmap :Q :q
 
 " Line numbers and nice tab and eol when using set list
 set number
-set relativenumber
 set listchars=tab:▸\ ,eol:¬
 
 
