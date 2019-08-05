@@ -70,7 +70,6 @@ bindkey "${terminfo[kend]}" end-of-line
 # Aliases
 alias ll='ls -la'
 alias pac="sudo pacman -S"
-alias apt="sudo apt-get install"
 alias gopen="gnome-open"
 alias l="ls --color=auto"
 alias ls="ls --color=auto"
@@ -82,7 +81,6 @@ alias :wq="exit"
 alias gk="gitk --all&"
 alias sz='source ~/.zshrc'
 alias vz='vim ~/.zshrc'
-alias vzw='vim ~/.zaxisrc'
 alias vv='vim ~/.vimrc'
 alias v='vim'
 alias ..="cd .."
@@ -110,8 +108,5 @@ export LESS=-r
 function cl() {
 	cd "$1" && ls
 }
-
-# Work
-source ~/.zaxisrc
 
 unsetopt correct

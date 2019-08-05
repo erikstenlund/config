@@ -20,32 +20,29 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'msanders/snipmate.vim'
 Plugin 'sickill/vim-monokai'
 Plugin 'morhetz/gruvbox'
+Plugin 'rhysd/vim-clang-format'
 
 call vundle#end()
 filetype plugin indent on
 
-" Setting for plugins
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
-"Airline
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_section_z = airline#section#create(['%4l/%L%3v'])
-set noshowmode
-set ttimeoutlen=100 "this messes up vim-surround!
-set t_Co=256
+" Status bar
+set statusline+=%F
+set statusline+=\ - 
+set statusline+=%y
 
-" Manual statusline instead of Airline
-" set statusline+=%F
-" set statusline+=\ - 
-" set statusline+=%y
+" Clang format
+autocmd FileType c,cpp ClangFormatAutoEnable
+let g:clang_format#detect_style_file = 1
+let g:clang_format#auto_format = 1
+let g:clang_format#auto_format_on_insert_leave = 1
 
-"Tagbar (Obs <C-m> == Enter)
+" Tagbar <C-m> == Enter
 map <C-m> :TagbarToggle<CR>
 
-"Syntastic
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -53,19 +50,6 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-if has ('gui_running')
-	set vb t_vb=
-	set guioptions-=m
-	set guioptions-=T
-	set guioptions-=L
-	set guioptions-=R
-	colorscheme monokai 
-	set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10
-endif
-
-" Omcicompletion from http://stackoverflow.com/questions/30180064/how-to-setup-youcompleteme-for-kernel-and-device-driver-development
-"
 
 set tags=./tags;
 
@@ -108,12 +92,9 @@ let OmniCpp_MayCompleteScope = 0
 " don't select first item in pop-up menu
 let OmniCpp_SelectFirstItem = 0
 
-" Regular settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 " gVim specific settings
 if has('gui_running')
+	set vb t_vb=
 	set guioptions-=T "no toolbar
 	set guioptions-=m "no menubar
 	set guioptions-=r "no right-hand scroll bar
@@ -121,8 +102,7 @@ if has('gui_running')
 	colorscheme gruvbox
 	set background=dark
 
-	set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
-
+	set guifont=Monospace\ 12
 endif
 
 " Highlight color
@@ -222,10 +202,7 @@ endfunction
 set dir=~/.vim/.vimswapfiles//
 set backupdir=~/.vim/.vimbackupfiles//
 
-
-" Based on the example .vimrc file
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" allow backspacing over everything in insert mode
+" Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
 
