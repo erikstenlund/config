@@ -25,6 +25,7 @@ setup_git() {
 	git config --global alias.br branch
 	git config --global alias.st status
 	git config --global alias.ci commit
+	# git config --global commit.gpgsign true
 }
 
 setup_directories_and_dotfiles() {
@@ -41,7 +42,7 @@ setup_directories_and_dotfiles() {
 	ln -sv $PWD/snippets $HOMEDIR/.vim/
 	ln -sv $PWD/.i3 $HOMEDIR
 	ln -sv $PWD/.i3status.conf $HOMEDIR
-	ln -sv $PWD/terminator_config $HOMEDIR
+	ln -sv $PWD/terminator_config $HOMEDIR/.config/terminator/config
 }
 
 setup_vim() {
@@ -68,3 +69,10 @@ case $yn in
 	*)
 		;;
 esac
+
+setup_git
+setup_directories_and_dotfiles
+setup_vim
+setup_sh
+
+# Missing, rclone + systemd job, vscode
