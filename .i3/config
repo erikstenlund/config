@@ -11,6 +11,10 @@ new_window 1pixel
 # run feh script for background
 exec ~/.fehbg &
 
+# network applet and vpn
+exec nm-applet &
+exec mullvad-vpn &
+
 # volume control
 bindsym XF86AudioLowerVolume exec amixer set Master '5%-'
 bindsym XF86AudioRaiseVolume exec amixer set Master '5%+'

@@ -1,5 +1,4 @@
-# PROMPT SETTINGS
-# Set up the prompt
+# Set up prompt
 autoload -U colors && colors
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
@@ -9,22 +8,6 @@ zstyle '*' formats '%b'
 PROMPT="%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}\${vcs_info_msg_0_:=%m}%{$reset_color%}~> "
 RPROMPT="%{$fg[cyan]%}%~%{$reset_color%}"
 
-#bindkey -e
-
-# Prompt when using Vi-mode instead of Emacs mode
-# export KEYTIMEOUT=1
-# bindkey -v
-# # Keep backward search using Vi mode
-# bindkey '^r' history-incremental-search-backward
-# function zle-keymap-select zle-line-init () {
-#     PROMPT="${${KEYMAP/vicmd/"%{$fg[blue]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}/(main|viins)/"%{$fg[blue]%}%n%{$fg[green]%}@%{$fg[magenta]%}%m%{$reset_color%}~> "}"
-#     zle reset-prompt
-# }
-
-# zle -N zle-line-init
-# zle -N zle-keymap-select
-
-# HISTORY SETTINGS
 # Keep X lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=100000000
 SAVEHIST=100000000
@@ -32,7 +15,6 @@ HISTFILE=~/.zsh_history
 setopt inc_append_history
 setopt hist_ignore_dups
 
-# COMPLETION
 # Use modern completion system
 autoload -Uz compinit
 compinit
