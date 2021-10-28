@@ -29,11 +29,9 @@ setup_git() {
 }
 
 setup_directories_and_dotfiles() {
-	echo "Creating directories"
-	mkdir -pv $HOMEDIR/{Repos,Software}
-
 	echo "Setting up dotfiles into $HOMEDIR"
-	mkdir -pv $HOMEDIR/.vim/{.vimswapfiles,.vimbackupfiles,bundle}
+	mkdir -pv $HOMEDIR/.vim/.vimswapfiles
+	mkdir -pv $HOMEDIR/.vim/.vimbackupfiles
 	mkdir -pv $HOMEDIR/.config/terminator
 
 	echo "Set up symlinks to $HOMEDIR"
