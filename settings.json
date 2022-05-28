@@ -1,0 +1,16 @@
+{
+    "keyboard.dispatch": "keyCode",
+    "vim.leader": ",",
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["<leader>","a"],
+            "commands": ["workbench.view.explorer"]
+        }
+    ],
+    "vim.vimrc.enable": true,
+    "workbench.activityBar.visible": false,
+    "window.menuBarVisibility": "toggle",
+    "window.openFoldersInNewWindow": "off",
+    "C_Cpp.clang_format_fallbackStyle": "LLVM",
+    "workbench.colorTheme": "Monokai"
+}
