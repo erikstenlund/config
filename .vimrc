@@ -121,10 +121,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 map j gj
 map k gk
 
-" Add matching parenthesis and leave with Ctrl+j
-inoremap ( ()<Esc>:let leavechar=")"<CR>i
-imap <C-j> <Esc>:exec "normal f" . leavechar<CR>a
-
 " Leader keys
 let mapleader = ","
 let g:mapleader = ","
