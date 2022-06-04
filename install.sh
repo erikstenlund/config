@@ -33,6 +33,7 @@ setup_directories_and_dotfiles() {
 	mkdir -pv $HOMEDIR/.vim/.vimswapfiles
 	mkdir -pv $HOMEDIR/.vim/.vimbackupfiles
 	mkdir -pv $HOMEDIR/.config/terminator
+	mkdir -pv $HOMEDIR/.config/Code/User
 
 	echo "Set up symlinks to $HOMEDIR"
 	ln -sv $PWD/.vimrc $HOMEDIR 
@@ -41,6 +42,8 @@ setup_directories_and_dotfiles() {
 	ln -sv $PWD/.i3 $HOMEDIR
 	ln -sv $PWD/.i3status.conf $HOMEDIR
 	ln -sv $PWD/terminator_config $HOMEDIR/.config/terminator/config
+	ln -sv $PWD/settings.json $HOMEDIR/.config/Code/User/
+	ln -sv $PWD/keybindings.json $HOMEDIR/.config/Code/User/
 }
 
 setup_vim() {

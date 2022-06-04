@@ -1,5 +1,4 @@
-{
-    "keyboard.dispatch": "keyCode",
+{ "keyboard.dispatch": "keyCode",
     "vim.leader": ",",
     "vim.normalModeKeyBindings": [
         {
@@ -12,5 +11,20 @@
     "window.menuBarVisibility": "toggle",
     "window.openFoldersInNewWindow": "off",
     "C_Cpp.clang_format_fallbackStyle": "LLVM",
-    "workbench.colorTheme": "Monokai"
+    "workbench.colorTheme": "Monokai",
+    "cmake.configureOnOpen": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.showTabs": false,
+    "vim.visualstar": true,
+    "vim.useSystemClipboard": true,
+    "vim.smartRelativeLine": true,
+    "vim.showMarksInGutter": true,
+    "vim.useCtrlKeys": true
 }
+
+
+
+
+
+
+        
