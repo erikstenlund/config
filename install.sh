@@ -25,6 +25,7 @@ setup_git() {
 	git config --global alias.br branch
 	git config --global alias.st status
 	git config --global alias.ci commit
+	git config --global alias.cp cherry-pick
 	# git config --global commit.gpgsign true
 }
 
@@ -44,6 +45,7 @@ setup_directories_and_dotfiles() {
 	ln -sv $PWD/terminator_config $HOMEDIR/.config/terminator/config
 	ln -sv $PWD/settings.json $HOMEDIR/.config/Code/User/
 	ln -sv $PWD/keybindings.json $HOMEDIR/.config/Code/User/
+	ln -sv $PWD/.Xresources $HOMEDIR/
 }
 
 setup_vim() {
