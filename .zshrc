@@ -86,6 +86,27 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 export LESS=-r
 
+## vi mode
+bindkey -v
+bindkey "^R" history-incremental-search-backward
+
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+    echo "$CUTBUFFER" | xclip -i -sel clipboard
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
+zle-keymap-select() {
+  case $KEYMAP in
+    vicmd) print -rn -- $terminfo[cvvis];; # block cursor
+    viins|main) print -rn -- $terminfo[cnorm];; # less visible cursor
+  esac
+}
+zle -N zle-keymap-select
+
 # Functions
 function cl() {
 	cd "$1" && ls
