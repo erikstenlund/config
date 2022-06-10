@@ -1,6 +1,6 @@
 #!/bin/sh
 
-install_application() {
+install_applications() {
 	id=$(cat /etc/os-release | grep ^ID)
 	case $id in
 		*arch*)
@@ -45,7 +45,15 @@ setup_directories_and_dotfiles() {
 	ln -sv $PWD/terminator_config $HOMEDIR/.config/terminator/config
 	ln -sv $PWD/settings.json $HOMEDIR/.config/Code/User/
 	ln -sv $PWD/keybindings.json $HOMEDIR/.config/Code/User/
-	ln -sv $PWD/.Xresources $HOMEDIR/
+	ln -sv $PWD/.Xresources $HOMEDIR
+	ln -sv $PWD/.doom.d $HOMEDIR
+}
+
+setup_doomemacs() {
+	echo "Installing doom emacs"
+	git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.emacs.d
+	$HOMEDIR/.emacs.d/bin/doom install
+	$HOMEDIR/.emacs.d/bin/doom sync
 }
 
 setup_vim() {
@@ -76,6 +84,7 @@ esac
 setup_git
 setup_directories_and_dotfiles
 setup_vim
+setup_doomemacs
 setup_sh
 
 # Missing, rclone + systemd job, vscode

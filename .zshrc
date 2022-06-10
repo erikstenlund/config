@@ -112,4 +112,9 @@ function cl() {
 	cd "$1" && ls
 }
 
+
+# Add doom emacs to PATH
+export PATH=$PATH:$HOME/.emacs.d/bin
+
 unsetopt correct
+
